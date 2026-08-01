@@ -1,0 +1,4 @@
+import AppIntents
+import Foundation
+import PamNative
+public final class IntentsModule:NativeModule,@unchecked Sendable{public init(){};public func invoke(method:String,payload:Data,completion:@escaping ModuleCompletion){guard method=="register"else{completion(.failure,Data("Unknown method".utf8));return};do{let values=try WireMap.decode(payload);guard case let.text(json)?=values["json"]else{throw IntentError.invalid};let rows=try JSONSerialization.jsonObject(with:Data(json.utf8))as?[[String:Any]] ?? [];let group="group.\(Bundle.main.bundleIdentifier ?? "").pam-native";guard let defaults=UserDefaults(suiteName:group)else{throw IntentError.invalid};defaults.set(rows,forKey:"pam.intent.actions");if #available(iOS 16.0,*){PamIntentActionEntity.updateAppShortcutParameters()};completion(.success,try WireMap.encode([:]))}catch{completion(.failure,Data(String(describing:error).utf8))}}};private enum IntentError:Error{case invalid}
