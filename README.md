@@ -13,4 +13,7 @@ $intents->register([
 ], $complete);
 ```
 
-iOS uses the shared `group.<application-id>.pam-native` container. Keep titles stable: users may build automations that outlive an application update.
+iOS 18+ uses the shared `group.<application-id>.pam-native` container. Apple requires
+the `OpenURLIntent` destination to be an HTTPS universal link associated with the app;
+custom URL schemes remain supported by Android Dynamic Shortcuts. Keep titles stable:
+users may build automations that outlive an application update.
