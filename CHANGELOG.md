@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.2 - 2026-08-24
+
+- Expand the plugin contract through the complete pre-1.0 PAM Native line.
+
 ## 0.1.1 - 2026-08-24
 
 - Certify PAM Native 0.9.1 while preserving the supported 0.8 line.
